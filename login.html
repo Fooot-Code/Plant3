@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant³ | NASA HUNCH Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="center-body">
+    <canvas id="bg-animation"></canvas>
+    
+    <main class="login-card">
+        <div class="logo-container">
+            <img class="logo" src="images/introLogo.png" alt="Plant Cubed Logo">
+            <h2>NASA HUNCH AI PLANT GROWTH LAB</h2>
+        </div>
+
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Astronaut / Researcher ID</label>
+                <input type="text" id="username" name="username" placeholder="e.g. ASTRO-0912" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Access Code</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+
+            <button id="login-button" type="submit" class="btn-primary">Initialize System Access</button>
+        </form>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
