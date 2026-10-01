@@ -14,7 +14,8 @@
         </div>
         <nav>
             <a href="home.html" class="active">Overview</a>
-            <a href="plantAnalysis.html">AI Telemetry</a>
+            <a href="plantAnalysis.html">Plant Information</a>
+            <a href="containerInfo.html">Container Information</a>
             <a href="login.html" class="logout-btn">Logout</a>
         </nav>
     </header>
@@ -23,10 +24,32 @@
         <section class="hero-banner">
             <div class="hero-text">
                 <span class="badge-tag">NASA HUNCH</span>
-                <h1>AI Plant Analysis</h1>
-                <a href="plantAnalysis.html" class="btn-primary">Navigate to Dashboard</a>
+                <h1>AI Plant Monitor</h1>
+                <a href="plantAnalysis.html" class="btn-primary">Navigate to Plant Information</a>
+                <a href="containerInfo.html" class="btn-primary">Navigate to Container Information</a>
             </div>
             <div class="hero-stats">
+                <div class="stat-card">
+                    <span class="stat-value">3 / 3</span>
+                    <span class="stat-label">Active Chambers</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">98.4%</span>
+                    <span class="stat-label">AI Diagnostic Accuracy</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-value">Nominal</span>
+                    <span class="stat-label">System Health</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="hero-banner">
+            <div class="hero-text">
+                <h1>Quick Data</h1>
+            </div>
+
+            <div class="hero-stats" id="overview">
                 <div class="stat-card">
                     <span class="stat-value">3 / 3</span>
                     <span class="stat-label">Active Chambers</span>
