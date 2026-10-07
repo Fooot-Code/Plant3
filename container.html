@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant³ | Container Information</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <canvas id="bg-animation"></canvas>
+
+    <header class="navbar">
+        <div class="nav-brand">
+            <a href="home.html">
+                <img class="nav-logo" src="images/sidewaysLogo.png" alt="Plant³ Logo" >
+            </a>
+        </div>
+        <nav>
+            <a href="home.html">Overview</a>
+            <a href="plantAnalysis.html">AI Telemetry</a>
+            <a href="container.html" class="active">Container Info</a>
+            <a href="login.html" class="logout-btn">Logout</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="header-section">
+            <div>
+                <h2>Overall Habitat Container Status</h2>
+                <p style="color: var(--text-muted);">24" x 24" x 25" Enclosed Microgravity Plant Habitat Diagnostics</p>
+            </div>
+        </div>
+
+            <!-- Container Telemetry Metrics -->
+            <section class="metrics-panel">
+                <h3>Container Telemetry</h3>
+                <br>
+                <div class="metric-row">
+                    <span class="m-label">Internal Temperature</span>
+                    <span class="m-val text-green" id="temp-val">23.5°C (Nominal)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="m-label">Relative Humidity</span>
+                    <span class="m-val">62% RH</span>
+                </div>
+                <div class="metric-row">
+                    <span class="m-label">Atmospheric CO2</span>
+                    <span class="m-val">1150 ppm</span>
+                </div>
+                <div class="metric-row">
+                    <span class="m-label">Exhaust Ventilation Fan</span>
+                    <span class="m-val text-green">ACTIVE (1200 RPM)</span>
+                </div>
+                <div class="metric-row">
+                    <span class="m-label">Enclosure Hatch Status</span>
+                    <span class="m-val text-green">SEALED</span>
+                </div>
+            </section>
+
+            <!-- Container Telemetry Metrics -->
+            <section class="container-ai-panel">
+                <h3>Container AI Analysis</h3>
+                <br>
+                <div class="metric-row">
+                    <span class="m-label">Container Health</span>
+                    <span class="m-val text-green" id="temp-val">Nominal (98.5% confidence) </span>
+                </div>
+                <div class="metric-row">
+                    <span class="m-label">Diagnosis</span>
+                    <span class="m-val text-green">None</span>
+                </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,5 +1,3 @@
-// NASA HUNCH AI Plant Growth Lab - Interactivity Script
-
 document.addEventListener("DOMContentLoaded", () => {
     
     // --- 1. Login Handling ---
@@ -7,120 +5,129 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loginForm) {
         loginForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            // Redirect to home dashboard
             window.location.href = "home.html";
         });
     }
 
-    // --- 2. Filter Chamber Specimens ---
-    const filterBtns = document.querySelectorAll(".filter-btn");
-    const plantCards = document.querySelectorAll(".plant-card");
+    // --- 2. Camera View & Timestamp Updates ---
+    const camTime = document.getElementById("cam-time");
+    if (camTime) {
+        setInterval(() => {
+            const now = new Date();
+            camTime.innerText = "UTC " + now.toUTCString().split(" ")[4];
+        }, 1000);
+    }
 
-    if (filterBtns.length > 0) {
-        filterBtns.forEach(btn => {
-            btn.addEventListener("click", () => {
-                filterBtns.forEach(b => b.classList.remove("active"));
-                btn.classList.add("active");
-
-                const filter = btn.getAttribute("data-filter");
-
-                plantCards.forEach(card => {
-                    if (filter === "all" || card.getAttribute("data-status") === filter) {
-                        card.style.display = "block";
-                    } else {
-                        card.style.display = "none";
-                    }
-                });
-            });
+    const snapBtn1 = document.getElementById("snap-btn-1");
+    if (snapBtn1) {
+        snapBtn1.addEventListener("click", () => {
+            alert("Camera Snapshot saved to local Raspberry Pi directory.");
         });
     }
 
-    // --- Interactive Diagnostic Modal ---
+    const snapBtn2 = document.getElementById("snap-btn-2");
+    if (snapBtn2) {
+        snapBtn2.addEventListener("click", () => {
+            alert("Camera Snapshot saved to local Raspberry Pi directory.");
+        });
+    }
+
+    // --- 3. Dynamic Background Canvas Particles ---
+    const canvas = document.getElementById("bg-animation");
+    if (canvas) {
+        const ctx = canvas.getContext("2d");
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        const numCircles = 150;
+        const circles = [];
+
+        for (let i = 0; i < numCircles; i++) {
+            circles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                radius: Math.random() * 3 + 1,
+                dx: (Math.random() - 0.5) * 0.5,
+                dy: (Math.random() - 0.5) * 0.5,
+                alpha: Math.random() * 0.35 + 0.1,
+                grayValue: Math.floor(Math.random() * 80 + 150)
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            circles.forEach(c => {
+                c.x += c.dx;
+                c.y += c.dy;
+
+                if (c.x < -10) c.x = canvas.width + 10;
+                if (c.x > canvas.width + 10) c.x = -10;
+                if (c.y < -10) c.y = canvas.height + 10;
+                if (c.y > canvas.height + 10) c.y = -10;
+
+                ctx.beginPath();
+                ctx.arc(c.x, c.y, c.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${c.grayValue}, ${c.grayValue}, ${c.grayValue}, ${c.alpha})`;
+                ctx.fill();
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    }
+
+    // --- 4. Modal Interactions ---
     const modalOverlay = document.getElementById("modal-overlay");
     const modalClose = document.getElementById("modal-close");
     const inspectBtns = document.querySelectorAll(".inspect-btn");
-    const modalTitle = document.getElementById("modal-title");
 
     if (modalOverlay && modalClose) {
-        // Open modal
         inspectBtns.forEach(btn => {
-            btn.addEventListener("click", (e) => {
-                const card = e.currentTarget.closest(".plant-card");
-                const chamberTitle = card.querySelector(".card-header h3").innerText;
-                modalTitle.innerText = `${chamberTitle} - Diagnostic Data`;
-                
+            btn.addEventListener("click", () => {
                 modalOverlay.classList.remove("modal-hidden");
             });
         });
 
-        // Close modal via 'X' button
-        modalClose.addEventListener("click", (e) => {
-            e.preventDefault();
+        modalClose.addEventListener("click", () => {
             modalOverlay.classList.add("modal-hidden");
         });
 
-        // Close modal when clicking outside the content card
         modalOverlay.addEventListener("click", (e) => {
             if (e.target === modalOverlay) {
                 modalOverlay.classList.add("modal-hidden");
             }
         });
     }
-    // Dynamic Gray Floating Particles
-const canvas = document.getElementById("bg-animation");
 
-if (canvas) {
-    const ctx = canvas.getContext("2d");
+    // Filter buttons
 
-    // Fit canvas to full window size
-    function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-    }
-    resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const plantCards = document.querySelectorAll('.plant-card');
 
-    // Generate random gray circles
-    const numCircles = 100; // Change circle count here
-    const circles = [];
+    filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            // 1. Toggle active button styling
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-    for (let i = 0; i < numCircles; i++) {
-        circles.push({
-            x: Math.random() * canvas.width,
-            y: Math.random() * canvas.height,
-            radius: Math.random() * 3 + 1.5,                 // Circle size (1.5px to 4.5px)
-            dx: (Math.random() - 0.5) * 0.6,                 // Random X direction & velocity
-            dy: (Math.random() - 0.5) * 0.6,                 // Random Y direction & velocity
-            alpha: Math.random() * 0.4 + 0.15,               // Random gray transparency
-            grayValue: Math.floor(Math.random() * 80 + 150)  // Variations of light gray (150-230)
+            // 2. Get selected filter value
+            const targetFilter = button.getAttribute('data-filter');
+
+            // 3. Show or hide cards based on status
+            plantCards.forEach(card => {
+                const cardStatus = card.getAttribute('data-status');
+
+                if (targetFilter === 'all' || cardStatus === targetFilter) {
+                    card.style.display = ''; // Restores default styling (block/flex)
+                } else {
+                    card.style.display = 'none'; // Hides filtered out cards
+                }
+            });
         });
-    }
+    });
 
-    // Animation Loop
-    function animate() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        circles.forEach(c => {
-            // Update position
-            c.x += c.dx;
-            c.y += c.dy;
-
-            // Wrap around edges when moving off-screen
-            if (c.x < -10) c.x = canvas.width + 10;
-            if (c.x > canvas.width + 10) c.x = -10;
-            if (c.y < -10) c.y = canvas.height + 10;
-            if (c.y > canvas.height + 10) c.y = -10;
-
-            // Render circle
-            ctx.beginPath();
-            ctx.arc(c.x, c.y, c.radius, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${c.grayValue}, ${c.grayValue}, ${c.grayValue}, ${c.alpha})`;
-            ctx.fill();
-        });
-
-        requestAnimationFrame(animate);
-    }
-
-    animate();
-}
 });
