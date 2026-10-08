@@ -1,14 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Navigation Hamburger Menu Toggle
-const menuToggle = document.getElementById('menu-toggle');
+    const menuToggle = document.getElementById('menu-toggle');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('a[href^="#"]');
 
-    // Toggle menu state
+    // Single place that opens/closes the drawer, so the icon, drawer and
+    // aria-expanded state can never get out of sync.
+    function setMenuOpen(isOpen) {
+        if (!menuToggle || !navMenu) return;
+        menuToggle.classList.toggle('active', isOpen);
+        navMenu.classList.toggle('active', isOpen);
+        menuToggle.setAttribute('aria-expanded', String(isOpen));
+    }
+
     if (menuToggle && navMenu) {
         menuToggle.addEventListener('click', () => {
-            menuToggle.classList.toggle('active');
-            navMenu.classList.toggle('active');
+            setMenuOpen(!navMenu.classList.contains('active'));
+        });
+
+        // Tap outside the drawer, or press Escape, to close it
+        document.addEventListener('click', (e) => {
+            if (!navMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+                setMenuOpen(false);
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') setMenuOpen(false);
+        });
+
+        // Reset the drawer if the screen is resized/rotated up to desktop width
+        window.matchMedia('(min-width: 851px)').addEventListener('change', (e) => {
+            if (e.matches) setMenuOpen(false);
         });
     }
 
@@ -17,10 +40,7 @@ const menuToggle = document.getElementById('menu-toggle');
         link.addEventListener('click', (e) => {
             const targetId = link.getAttribute('href');
 
-            if (menuToggle && navMenu) {
-                menuToggle.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
+            setMenuOpen(false);
 
             if (targetId === '#' || targetId === '') return;
 
