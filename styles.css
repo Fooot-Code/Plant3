@@ -55,6 +55,12 @@
     --font-body: 'Open Sans', sans-serif;
 }
 
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -71,6 +77,8 @@ body {
         radial-gradient(circle at 15% 15%, rgba(34, 197, 94, 0.12) 0%, transparent 40%),
         radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.15) 0%, transparent 45%);
     background-attachment: fixed;
+
+    
 }
 
 /* Typography & Headers */
