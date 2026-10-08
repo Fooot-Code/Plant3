@@ -6,10 +6,12 @@
     --accent-green: #22C55E;
     --accent-green-glow: rgba(34, 197, 94, 0.15);
     --accent-purple: #8B5CF6;
+    --accent-cyan: #00E5FF;
     --accent-danger: #EF4444;
     --text-main: #F8FAFC;
     --text-muted: #94A3B8;
     --font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    --font-heading: var(--font-stack);
 }
 
 * {
@@ -29,6 +31,10 @@ body {
         radial-gradient(circle at 85% 85%, rgba(139, 92, 246, 0.15) 0%, transparent 45%);
     background-attachment: fixed;
 }
+
+/* Utility Text Classes */
+.text-green { color: var(--accent-green); font-weight: 600; }
+.text-danger, .text-alert { color: var(--accent-danger); font-weight: 600; }
 
 /* Layout Containers */
 .container {
@@ -65,9 +71,9 @@ nav {
 }
 
 .logo-img {
-    height: 32px;          /* Sizes image relative to the 70px header */
-    width: auto;           /* Automatically keeps original aspect ratio */
-    object-fit: contain;  /* Prevents clipping */
+    height: 32px;          /* Sizes image relative to header */
+    width: auto;           /* Keeps original aspect ratio */
+    object-fit: contain;  
     display: block;
 }
 
@@ -147,14 +153,31 @@ nav {
 }
 
 .btn-secondary {
-    background: transparent;
-    color: var(--text-main);
+    background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--card-border);
+    color: var(--text-main);
+    padding: 0.65rem 1.25rem;
+    border-radius: 6px;
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
 }
 
 .btn-secondary:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: var(--accent-green);
+    background: rgba(75, 169, 75, 0.2);
+    border-color: var(--primary-green);
+    color: #ffffff;
+    box-shadow: 0 0 10px rgba(75, 169, 75, 0.25);
+}
+
+.btn-secondary:active {
+    background: rgba(75, 169, 75, 0.35);
 }
 
 .badge {
@@ -190,6 +213,26 @@ nav {
     display: inline-block;
 }
 
+.status-badge {
+    font-family: var(--font-heading);
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+}
+
+.status-badge.healthy { 
+    background: rgba(34, 197, 94, 0.2); 
+    color: var(--accent-green); 
+    border: 1px solid var(--accent-green); 
+}
+
+.status-badge.alert { 
+    background: rgba(239, 68, 68, 0.2); 
+    color: var(--accent-danger); 
+    border: 1px solid var(--accent-danger); 
+}
+
 /* Card System */
 .card {
     background: var(--card-bg);
@@ -213,11 +256,16 @@ nav {
     border-top-left-radius: 16px;
 }
 
-.card-header-flex {
+.card-header-flex, .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+}
+
+.card-header h3 {
+    font-size: 1rem;
+    max-width: 70%;
 }
 
 .card-description {
@@ -242,16 +290,14 @@ nav {
     padding: 1rem;
 }
 
-/* Universal image class for placeholder containers */
 .media-img {
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Use 'contain' for CAD models if you don't want edges cropped */
+    object-fit: contain;
     border-radius: 10px;
     display: block;
 }
 
-/* Specific image fit for CAD renders so nothing gets cropped out */
 .cad-img {
     object-fit: contain;
     background: rgba(0, 0, 0, 0.2);
@@ -291,6 +337,88 @@ nav {
     margin-bottom: 2.5rem;
     font-size: 1.05rem;
 }
+
+/* --- Interactive Modal Overlay --- */
+#modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(11, 15, 23, 0.85);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Hidden state for Javascript toggles */
+#modal-overlay.modal-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+.modal-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 2.25rem 2rem 2rem;
+    width: 90%;
+    max-width: 480px;
+    position: relative;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 25px var(--green-glow);
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+/* Vertical slide animation when hidden */
+#modal-overlay.modal-hidden .modal-card {
+    transform: translateY(-15px);
+}
+
+#modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+#modal-close:hover {
+    color: var(--accent-red);
+}
+
+#modal-title {
+    font-family: var(--font-heading);
+    color: var(--primary-green);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+#modal-desc {
+    color: var(--text-muted);
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-top: 0.75rem;
+}
+
+#modal-action-btn {
+    width: 100%;
+    margin-top: 1.5rem;
+}
+
 
 .overview-section {
     padding: 4rem 0;
@@ -353,23 +481,38 @@ nav {
     color: var(--text-muted);
 }
 
-/* Dashboard Simulation */
+/* Dashboard & Carousel Simulation */
 .dashboard-sim {
     padding: 4rem 0;
 }
 
-.chamber-cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+.chamber-cards-grid, .plant-carousel {
+    display: flex;
     gap: 1.5rem;
-    margin-top: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1.5rem;
+    padding-top: 1rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-green) var(--bg-dark);
 }
 
-.chamber-card {
-    background: rgba(15, 23, 42, 0.8);
+.chamber-card, .plant-card {
+    flex: 0 0 calc(33.333% - 1rem);
+    min-width: 300px;
+    scroll-snap-align: start;
+    background: var(--card-bg);
     border: 1px solid var(--card-border);
     border-radius: 12px;
     padding: 1.25rem;
+    backdrop-filter: blur(12px);
+    list-style: none;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.chamber-card:hover, .plant-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent-green);
 }
 
 .card-alert {
@@ -383,7 +526,8 @@ nav {
     margin-bottom: 1rem;
 }
 
-.chamber-img-box {
+.chamber-img-box, .img-wrapper {
+    position: relative;
     width: 100%;
     height: 200px;
     background: #000;
@@ -392,10 +536,50 @@ nav {
     margin-bottom: 1rem;
 }
 
-.chamber-img-box img {
+.chamber-img-box img, .plant-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.ai-overlay {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+.ai-tag {
+    font-size: 0.65rem;
+    background: rgba(0, 229, 255, 0.15);
+    color: var(--accent-cyan);
+    border: 1px solid var(--accent-cyan);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-family: var(--font-heading);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.metric {
+    background: rgba(0, 0, 0, 0.25);
+    padding: 0.6rem;
+    border-radius: 6px;
+}
+
+.m-label {
+    display: block;
+    font-size: 0.7rem;
+    color: var(--text-muted);
+}
+
+.m-val {
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 
 .telemetry-row {
@@ -406,14 +590,6 @@ nav {
     border-radius: 6px;
     font-size: 0.85rem;
     margin-bottom: 0.5rem;
-}
-
-.text-green {
-    color: var(--accent-green);
-}
-
-.text-danger {
-    color: var(--accent-danger);
 }
 
 /* Team Section */
@@ -457,7 +633,7 @@ footer {
 
 .footer-flex {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -466,6 +642,7 @@ footer {
     font-weight: 700;
     font-size: 1.1rem;
     margin-bottom: 0.25rem;
+    text-align: center;
 }
 
 .qr-container {
@@ -495,12 +672,15 @@ footer {
     border-radius: 8px;
 }
 
-/* Responsive Styles */
+/* Responsive Layout */
 @media (max-width: 900px) {
     .hero, .overview-section, .capabilities-grid, .team-section {
         grid-template-columns: 1fr;
     }
     .hero-title {
         font-size: 2.5rem;
+    }
+    .chamber-card, .plant-card {
+        flex: 0 0 85%;
     }
 }

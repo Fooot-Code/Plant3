@@ -54,7 +54,6 @@
         <section id="overview" class="overview-section">
             <div class="card">
                 <h2 class="section-title">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>
                     Problem Statement
                 </h2>
                 <ul class="bullet-list">
@@ -66,7 +65,6 @@
 
             <div class="card">
                 <h2 class="section-title">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
                     Project Requirements
                 </h2>
                 <ul class="bullet-list">
@@ -170,83 +168,71 @@
             </div>
         </section>
 
+
+
         <!-- Live Telemetry / Digital Prototype Section -->
         <section id="telemetry" class="dashboard-sim">
             <h2 class="section-title">Chamber Telemetry & AI Diagnostic Feed</h2>
             <p class="section-subtitle">Simulated live feed from the Plant³ multi-crop monitoring dashboard.</p>
 
-            <div class="chamber-cards-grid">
-                
-                <!-- Crop Card 1 -->
-                <div class="chamber-card">
-                    <div class="chamber-header">
-                        <strong>Chamber 01: Dwarf Tomato</strong>
-                        <span class="badge badge-small">Nominal</span>
-                    </div>
-                    <div class="chamber-img-box">
-                        <img src="https://images.nasa.gov/details-KSC-20221012-PH-KLS01_0003" alt="Dwarf Tomato" onerror="this.src='https://via.placeholder.com/300x200/0B0F17/22C55E?text=Dwarf+Tomato+Feed'">
-                    </div>
-                    <div class="telemetry-row">
-                        <span>Soil Moisture:</span>
-                        <strong class="text-green" id="moisture-1">68%</strong>
-                    </div>
-                    <div class="telemetry-row">
-                        <span>AI Status:</span>
-                        <span>Flowers Detected (Ready for Pollination)</span>
-                    </div>
-                    <div class="telemetry-row">
-                        <span>Light Height:</span>
-                        <span>14.2 cm (Optimal)</span>
-                    </div>
-                </div>
+            <div id="plants">
+                <ul class="plant-carousel">
+                    <li class="plant-card" data-status="optimal">
+                        <div class="card-header">
+                            <h3>Chamber 01: Dwarf Tomato</h3>
+                            <span class="status-badge healthy">NOMINAL</span>
+                        </div>
+                        <div class="img-wrapper">
+                            <img class="plant-img" src="images/tomato.jpg" alt="Chamber 1 Specimen">
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric"><span class="m-label">Water Status</span><span class="m-val text-green">Good</span></div>
+                            <div class="metric"><span class="m-label">Foliage Health</span><span class="m-val text-green">Good</span></div>
+                        </div>
+                        <button class="btn-secondary inspect-btn" style="width:100%; margin-top:1rem;">Inspect Telemetry</button>
+                    </li>
 
-                <!-- Crop Card 2 -->
-                <div class="chamber-card card-alert">
-                    <div class="chamber-header">
-                        <strong>Chamber 02: Red Lettuce</strong>
-                        <span class="badge badge-small badge-danger">Attention Required</span>
-                    </div>
-                    <div class="chamber-img-box">
-                        <img src="https://images.nasa.gov/details-KSC-20150708-PH_KLS01_0032" alt="Red Romaine Lettuce" onerror="this.src='https://via.placeholder.com/300x200/0B0F17/EF4444?text=Red+Lettuce+Feed'">
-                    </div>
-                    <div class="telemetry-row">
-                        <span>Soil Moisture:</span>
-                        <strong class="text-danger" id="moisture-2">34% (Low)</strong>
-                    </div>
-                    <div class="telemetry-row">
-                        <span>AI Status:</span>
-                        <span class="text-danger">Early Moisture Stress Detected</span>
-                    </div>
-                    <div class="telemetry-row">
-                        <span>Auto Response:</span>
-                        <span>Micro-Dosing Pump Triggered (+15mL)</span>
-                    </div>
-                </div>
+                    <li class="plant-card" data-status="alert">
+                        <div class="card-header">
+                            <h3>Chamber 02: Lettuce</h3>
+                            <span class="status-badge alert">WATER LOW</span>
+                        </div>
+                        <div class="img-wrapper">
+                            <img class="plant-img" src="images/lettuce.jpg" alt="Chamber 2 Specimen">
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric"><span class="m-label">Water Status</span><span class="m-val text-alert">32% (Refill)</span></div>
+                            <div class="metric"><span class="m-label">Foliage Health</span><span class="m-val text-green">Good</span></div>
+                        </div>
+                        <button class="btn-secondary inspect-btn" style="width:100%; margin-top:1rem;">Inspect Telemetry</button>
+                    </li>
 
-                <!-- Crop Card 3 -->
-                <div class="chamber-card">
-                    <div class="chamber-header">
-                        <strong>Chamber 03: Dwarf Tomato</strong>
-                        <span class="badge badge-small">Nominal</span>
-                    </div>
-                    <div class="chamber-img-box">
-                        <img src="https://images.nasa.gov/details-KSC-20221012-PH-KLS01_0003" alt="Dwarf Tomato" onerror="this.src='https://via.placeholder.com/300x200/0B0F17/22C55E?text=Dwarf+Tomato+Feed'">
-                    </div>
-                    <div class="telemetry-row">
-                        <span>Soil Moisture:</span>
-                        <strong class="text-green" id="moisture-3">72%</strong>
-                    </div>
-                    <div class="telemetry-row">
-                        <span>AI Status:</span>
-                        <span>Vegetative Canopy Growth Steady</span>
-                    </div>
-                    <div class="telemetry-row">
-                        <span>Light Height:</span>
-                        <span>12.8 cm</span>
-                    </div>
-                </div>
-
+                    <li class="plant-card" data-status="optimal">
+                        <div class="card-header">
+                            <h3>Chamber 03: Dwarf Tomato</h3>
+                            <span class="status-badge healthy">NOMINAL</span>
+                        </div>
+                        <div class="img-wrapper">
+                            <img class="plant-img" src="images/tomato.jpg" alt="Chamber 3 Specimen">
+                        </div>
+                        <div class="metrics-grid">
+                            <div class="metric"><span class="m-label">Water Status</span><span class="m-val text-green">Good</span></div>
+                            <div class="metric"><span class="m-label">Foliage Health</span><span class="m-val text-green">Good</span></div>
+                        </div>
+                        <button class="btn-secondary inspect-btn" style="width:100%; margin-top:1rem;">Inspect Telemetry</button>
+                    </li>
+                </ul>
             </div>
+
+            <!-- Modal Diagnostic Overlay -->
+            <div id="modal-overlay" class="modal-hidden">
+                <div class="modal-card">
+                    <button id="modal-close">&times;</button>
+                    <h3 id="modal-title">Specimen Telemetry Detail</h3>
+                    <p id="modal-desc" style="margin-top: 10px; font-size: 0.95rem;">Neural vision scan reveals no active fungal pathogens or nitrogen deficiencies.</p>
+                </div>
+            </div>
+
         </section>
 
         <!-- Team & Sponsor Section -->
@@ -260,7 +246,7 @@
 
             <div class="card">
                 <span class="badge badge-inline">Project Team & Mentors</span>
-                <h2 class="team-title">Warren Tech — Plant³ Lab</h2>
+                <h2 class="team-title">Warren Tech — Plant³</h2>
                 
                 <p class="team-info">
                     <strong>Student Engineers:</strong> Brennon Hill, Conner Walpole, Grayson McDaniel
@@ -269,6 +255,10 @@
                     <strong>Instructors:</strong> Nathan Olsen & Veronica Murray<br>
                     <span class="email-sub">Emails: nolsen@jeffcoschools.us | veronica.murray@jeffco.k12.co.us</span>
                 </p>
+                <p class="team-info">
+                    <strong>Program Alignment:</strong> Developed for the NASA HUNCH SFT 2026-27 AI Plant Growth for Space initiative.
+                </p>
+
                 <p class="team-info">
                     <strong>Program Alignment:</strong> Developed for the NASA HUNCH SFT 2026-27 AI Plant Growth for Space initiative.
                 </p>
@@ -282,17 +272,7 @@
         <div class="container footer-flex">
             <div>
                 <p class="footer-title">Plant³ — AI Plant Growth Lab</p>
-                <p>Designed for NASA HUNCH PDR / CDR Reviews | Warren Tech 2026-27</p>
-            </div>
-
-            <div class="qr-container">
-                <div class="qr-text">
-                    <p class="qr-title">Scan for Digital Hub</p>
-                    <p class="qr-sub">CAD Files, Repo & Documentation</p>
-                </div>
-                <div class="qr-placeholder">
-                    <svg width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="3" height="3"/><rect x="18" y="18" width="3" height="3"/></svg>
-                </div>
+                <p>Designed for NASA HUNCH PDR Review | Warren Tech 2026-27</p>
             </div>
         </div>
     </footer>

@@ -31,4 +31,27 @@ document.addEventListener('DOMContentLoaded', () => {
             moistureChamber3.textContent = `${val3}%`;
         }, 4000);
     }
+
+    const modalOverlay = document.getElementById("modal-overlay");
+    const modalClose = document.getElementById("modal-close");
+    const inspectBtns = document.querySelectorAll(".inspect-btn");
+
+    if (modalOverlay && modalClose) {
+        inspectBtns.forEach(btn => {
+            btn.addEventListener("click", () => {
+                modalOverlay.classList.remove("modal-hidden");
+            });
+        });
+
+        modalClose.addEventListener("click", () => {
+            modalOverlay.classList.add("modal-hidden");
+        });
+
+        modalOverlay.addEventListener("click", (e) => {
+            if (e.target === modalOverlay) {
+                modalOverlay.classList.add("modal-hidden");
+            }
+        });
+    }
+
 });
