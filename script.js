@@ -1,9 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Navigation Hamburger Menu Toggle
-    const menuToggle = document.getElementById('menu-toggle');
+const menuToggle = document.getElementById('menu-toggle');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('a[href^="#"]');
 
+    // Toggle menu state
     if (menuToggle && navMenu) {
         menuToggle.addEventListener('click', () => {
             menuToggle.classList.toggle('active');
@@ -11,22 +12,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Smooth scrolling & mobile menu auto-close
+    // Auto-close menu drawer when navigating to anchor sections
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
             const targetId = link.getAttribute('href');
 
-            // Close mobile menu if open
             if (menuToggle && navMenu) {
                 menuToggle.classList.remove('active');
                 navMenu.classList.remove('active');
             }
 
-            if (targetId === '#') return;
+            if (targetId === '#' || targetId === '') return;
 
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
+                e.preventDefault();
                 targetElement.scrollIntoView({
                     behavior: 'smooth',
                     block: 'start'
@@ -35,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    
     // Simulated Sensor Fluctuations
     const moistureChamber1 = document.getElementById('moisture-1');
     const moistureChamber3 = document.getElementById('moisture-3');
