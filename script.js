@@ -1,13 +1,30 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Smooth scrolling for navigation links
+    // Navigation Hamburger Menu Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('a[href^="#"]');
-    
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    // Smooth scrolling & mobile menu auto-close
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const targetId = link.getAttribute('href');
+
+            // Close mobile menu if open
+            if (menuToggle && navMenu) {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+
             if (targetId === '#') return;
-            
+
             const targetElement = document.querySelector(targetId);
             if (targetElement) {
                 targetElement.scrollIntoView({
@@ -18,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Live Telemetry Simulation (Slight fluctuations to simulate real-time sensors)
+    // Simulated Sensor Fluctuations
     const moistureChamber1 = document.getElementById('moisture-1');
     const moistureChamber3 = document.getElementById('moisture-3');
 
@@ -32,6 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 4000);
     }
 
+    // Modal Overlay Controls
     const modalOverlay = document.getElementById("modal-overlay");
     const modalClose = document.getElementById("modal-close");
     const inspectBtns = document.querySelectorAll(".inspect-btn");
@@ -53,5 +71,4 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-
 });

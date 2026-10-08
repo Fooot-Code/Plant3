@@ -14,9 +14,12 @@
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">
-                    <img class="logo-img" src="images/sidewaysLogo.png" alt="Plant³ Logo" >
+                    <img class="logo-img" src="images/sidewaysLogo.png" alt="Plant³ Logo">
                 </a>
-                <ul class="nav-links">
+                <button class="menu-toggle" id="menu-toggle" aria-label="Toggle navigation menu">
+                    <span class="hamburger"></span>
+                </button>
+                <ul class="nav-links" id="nav-menu">
                     <li><a href="#overview">Overview</a></li>
                     <li><a href="#hardware">Physical Design</a></li>
                     <li><a href="#code">AI & Software</a></li>
@@ -53,9 +56,7 @@
         <!-- Project Overview & Requirements -->
         <section id="overview" class="overview-section">
             <div class="card">
-                <h2 class="section-title">
-                    Problem Statement
-                </h2>
+                <h2 class="section-title">Problem Statement</h2>
                 <ul class="bullet-list">
                     <li><strong>Strict Spatial & Resource Limits:</strong> Current space plant enclosures operate under tight space and resource constraints.</li>
                     <li><strong>Manual Monitoring & Care:</strong> Astronauts must manually water and inspect crops, draining crew time.</li>
@@ -64,9 +65,7 @@
             </div>
 
             <div class="card">
-                <h2 class="section-title">
-                    Project Requirements
-                </h2>
+                <h2 class="section-title">Project Requirements</h2>
                 <ul class="bullet-list">
                     <li>24/7 continuous environmental sensor monitoring.</li>
                     <li>Moisture sensors detect individual plant water content in real-time.</li>
@@ -168,8 +167,6 @@
             </div>
         </section>
 
-
-
         <!-- Live Telemetry / Digital Prototype Section -->
         <section id="telemetry" class="dashboard-sim">
             <h2 class="section-title">Chamber Telemetry & AI Diagnostic Feed</h2>
@@ -186,7 +183,7 @@
                             <img class="plant-img" src="images/tomato.jpg" alt="Chamber 1 Specimen">
                         </div>
                         <div class="metrics-grid">
-                            <div class="metric"><span class="m-label">Water Status</span><span class="m-val text-green">Good</span></div>
+                            <div class="metric"><span class="m-label">Water Status</span><span class="m-val text-green" id="moisture-1">Good</span></div>
                             <div class="metric"><span class="m-label">Foliage Health</span><span class="m-val text-green">Good</span></div>
                         </div>
                         <button class="btn-secondary inspect-btn" style="width:100%; margin-top:1rem;">Inspect Telemetry</button>
@@ -216,7 +213,7 @@
                             <img class="plant-img" src="images/tomato.jpg" alt="Chamber 3 Specimen">
                         </div>
                         <div class="metrics-grid">
-                            <div class="metric"><span class="m-label">Water Status</span><span class="m-val text-green">Good</span></div>
+                            <div class="metric"><span class="m-label">Water Status</span><span class="m-val text-green" id="moisture-3">Good</span></div>
                             <div class="metric"><span class="m-label">Foliage Health</span><span class="m-val text-green">Good</span></div>
                         </div>
                         <button class="btn-secondary inspect-btn" style="width:100%; margin-top:1rem;">Inspect Telemetry</button>
@@ -229,7 +226,7 @@
                 <div class="modal-card">
                     <button id="modal-close">&times;</button>
                     <h3 id="modal-title">Specimen Telemetry Detail</h3>
-                    <p id="modal-desc" style="margin-top: 10px; font-size: 0.95rem;">Neural vision scan reveals no active fungal pathogens or nitrogen deficiencies.</p>
+                    <p id="modal-desc">Neural vision scan reveals no active fungal pathogens or nitrogen deficiencies.</p>
                 </div>
             </div>
 
@@ -239,7 +236,6 @@
         <section id="team" class="team-section">
             <div class="team-photo-box">
                 <div class="media-placeholder team-media">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent-green)" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
                     <img src="images/team.png" alt="Brennon, Conner, and Grayson" class="media-img">
                 </div>
             </div>
@@ -258,9 +254,8 @@
                 <p class="team-info">
                     <strong>Program Alignment:</strong> Developed for the NASA HUNCH SFT 2026-27 AI Plant Growth for Space initiative.
                 </p>
-
                 <p class="team-info">
-                    <strong>Program Alignment:</strong> Developed for the NASA HUNCH SFT 2026-27 AI Plant Growth for Space initiative.
+                    <strong>GitHub Repository:</strong> <a href="https://github.com/Fooot-Code/Plant3/tree/main" target="_blank" rel="noopener noreferrer" class="github-link">github.com/Fooot-Code/Plant3</a>
                 </p>
             </div>
         </section>

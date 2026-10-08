@@ -1,3 +1,44 @@
+/* ==========================================================================
+   NASA HUNCH AI PLANT LAB - SYSTEM STYLESHEET
+   Fonts: Montserrat (Headers) & Open Sans (Body)
+   ========================================================================== */
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('fonts/Montserrat-VariableFont_wght.ttf') format('truetype-variations'),
+         url('fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Montserrat';
+    src: url('fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype-variations'),
+         url('fonts/Montserrat-Italic-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype-variations'),
+         url('fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
+    font-weight: 300 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('truetype-variations'),
+         url('fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+    font-weight: 300 800;
+    font-style: italic;
+    font-display: swap;
+}
+
 :root {
     --bg-dark: #080C14;
     --bg-surface: #0D131F;
@@ -10,8 +51,8 @@
     --accent-danger: #EF4444;
     --text-main: #F8FAFC;
     --text-muted: #94A3B8;
-    --font-stack: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    --font-heading: var(--font-stack);
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Open Sans', sans-serif;
 }
 
 * {
@@ -23,7 +64,7 @@
 body {
     background-color: var(--bg-dark);
     color: var(--text-main);
-    font-family: var(--font-stack);
+    font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
     background-image: 
@@ -32,7 +73,11 @@ body {
     background-attachment: fixed;
 }
 
-/* Utility Text Classes */
+/* Typography & Headers */
+h1, h2, h3, h4, .section-title, .logo, .nav-links a, .btn, .badge, .status-badge {
+    font-family: var(--font-heading);
+}
+
 .text-green { color: var(--accent-green); font-weight: 600; }
 .text-danger, .text-alert { color: var(--accent-danger); font-weight: 600; }
 
@@ -71,14 +116,10 @@ nav {
 }
 
 .logo-img {
-    height: 32px;          /* Sizes image relative to header */
-    width: auto;           /* Keeps original aspect ratio */
-    object-fit: contain;  
+    height: 32px;
+    width: auto;
+    object-fit: contain;
     display: block;
-}
-
-.logo span {
-    color: var(--accent-green);
 }
 
 .nav-links {
@@ -90,12 +131,58 @@ nav {
 .nav-links a {
     color: var(--text-muted);
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 0.9rem;
     transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
     color: var(--accent-green);
+}
+
+/* Hamburger Toggle Button */
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 101;
+}
+
+.hamburger, .hamburger::before, .hamburger::after {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--text-main);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    position: relative;
+}
+
+.hamburger::before, .hamburger::after {
+    content: '';
+    position: absolute;
+    left: 0;
+}
+
+.hamburger::before { top: -7px; }
+.hamburger::after { top: 7px; }
+
+/* Hamburger Active Transform */
+.menu-toggle.active .hamburger {
+    background-color: transparent;
+}
+
+.menu-toggle.active .hamburger::before {
+    transform: rotate(45deg);
+    top: 0;
+    background-color: var(--accent-green);
+}
+
+.menu-toggle.active .hamburger::after {
+    transform: rotate(-45deg);
+    top: 0;
+    background-color: var(--accent-green);
 }
 
 /* Hero Section */
@@ -119,7 +206,7 @@ nav {
 }
 
 .hero-text p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     color: var(--text-muted);
     margin-bottom: 2rem;
 }
@@ -133,17 +220,19 @@ nav {
 .btn {
     padding: 0.85rem 1.75rem;
     border-radius: 8px;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
     transition: all 0.2s ease;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
+    cursor: pointer;
 }
 
 .btn-primary {
     background: var(--accent-green);
     color: #000;
+    border: none;
     box-shadow: 0 0 20px rgba(34, 197, 94, 0.4);
 }
 
@@ -156,28 +245,13 @@ nav {
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid var(--card-border);
     color: var(--text-main);
-    padding: 0.65rem 1.25rem;
-    border-radius: 6px;
-    font-family: var(--font-heading);
-    font-weight: 600;
-    font-size: 0.8rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
+    padding: 0.5rem;
 }
 
 .btn-secondary:hover {
-    background: rgba(75, 169, 75, 0.2);
-    border-color: var(--primary-green);
-    color: #ffffff;
-    box-shadow: 0 0 10px rgba(75, 169, 75, 0.25);
-}
-
-.btn-secondary:active {
-    background: rgba(75, 169, 75, 0.35);
+    background: rgba(34, 197, 94, 0.15);
+    border-color: var(--accent-green);
+    color: #fff;
 }
 
 .badge {
@@ -187,7 +261,7 @@ nav {
     padding: 0.25rem 0.75rem;
     border-radius: 999px;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
 }
@@ -198,23 +272,12 @@ nav {
     background: rgba(139, 92, 246, 0.15);
 }
 
-.badge-small {
-    font-size: 0.7rem;
-}
-
-.badge-danger {
-    border-color: var(--accent-danger);
-    color: var(--accent-danger);
-    background: rgba(239, 68, 68, 0.15);
-}
-
 .badge-inline {
     margin-bottom: 0.5rem;
     display: inline-block;
 }
 
 .status-badge {
-    font-family: var(--font-heading);
     font-size: 0.65rem;
     font-weight: 700;
     padding: 0.25rem 0.6rem;
@@ -286,50 +349,28 @@ nav {
     align-items: center;
     color: var(--text-muted);
     margin-bottom: 1.5rem;
-    text-align: center;
-    padding: 1rem;
+    overflow: hidden;
 }
 
 .media-img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    border-radius: 10px;
     display: block;
 }
 
 .cad-img {
-    object-fit: contain;
     background: rgba(0, 0, 0, 0.2);
 }
 
-.hero-media {
-    height: 320px;
-}
-
-.team-media {
-    height: 300px;
-    margin-bottom: 0;
-}
-
-.placeholder-title {
-    margin-top: 0.5rem;
-    font-weight: 600;
-    font-size: 0.9rem;
-}
-
-.placeholder-sub {
-    font-size: 0.8rem;
-}
+.hero-media { height: 320px; }
+.team-media { height: 300px; margin-bottom: 0; }
 
 /* Lists & Tables */
 .section-title {
     font-size: 2.2rem;
     color: var(--accent-green);
     margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
 }
 
 .section-subtitle {
@@ -337,88 +378,6 @@ nav {
     margin-bottom: 2.5rem;
     font-size: 1.05rem;
 }
-
-/* --- Interactive Modal Overlay --- */
-#modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(11, 15, 23, 0.85);
-    backdrop-filter: blur(12px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 1;
-    visibility: visible;
-    transition: opacity 0.3s ease, visibility 0.3s ease;
-}
-
-/* Hidden state for Javascript toggles */
-#modal-overlay.modal-hidden {
-    opacity: 0 !important;
-    visibility: hidden !important;
-    pointer-events: none !important;
-}
-
-.modal-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 2.25rem 2rem 2rem;
-    width: 90%;
-    max-width: 480px;
-    position: relative;
-    backdrop-filter: blur(16px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 25px var(--green-glow);
-    transform: translateY(0);
-    transition: transform 0.3s ease;
-}
-
-/* Vertical slide animation when hidden */
-#modal-overlay.modal-hidden .modal-card {
-    transform: translateY(-15px);
-}
-
-#modal-close {
-    position: absolute;
-    top: 16px;
-    right: 20px;
-    background: none;
-    border: none;
-    color: var(--text-muted);
-    font-size: 1.6rem;
-    line-height: 1;
-    cursor: pointer;
-    transition: color 0.2s ease;
-}
-
-#modal-close:hover {
-    color: var(--accent-red);
-}
-
-#modal-title {
-    font-family: var(--font-heading);
-    color: var(--primary-green);
-    font-size: 1.2rem;
-    font-weight: 700;
-}
-
-#modal-desc {
-    color: var(--text-muted);
-    font-family: var(--font-body);
-    font-size: 0.88rem;
-    line-height: 1.6;
-    margin-top: 0.75rem;
-}
-
-#modal-action-btn {
-    width: 100%;
-    margin-top: 1.5rem;
-}
-
 
 .overview-section {
     padding: 4rem 0;
@@ -448,9 +407,7 @@ nav {
     top: -0.2rem;
 }
 
-.hardware-section {
-    padding-top: 2rem;
-}
+.hardware-section { padding-top: 2rem; }
 
 .capabilities-grid {
     padding: 2rem 0 4rem;
@@ -482,11 +439,9 @@ nav {
 }
 
 /* Dashboard & Carousel Simulation */
-.dashboard-sim {
-    padding: 4rem 0;
-}
+.dashboard-sim { padding: 4rem 0; }
 
-.chamber-cards-grid, .plant-carousel {
+.plant-carousel {
     display: flex;
     gap: 1.5rem;
     overflow-x: auto;
@@ -497,7 +452,7 @@ nav {
     scrollbar-color: var(--accent-green) var(--bg-dark);
 }
 
-.chamber-card, .plant-card {
+.plant-card {
     flex: 0 0 calc(33.333% - 1rem);
     min-width: 300px;
     scroll-snap-align: start;
@@ -510,23 +465,12 @@ nav {
     transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
-.chamber-card:hover, .plant-card:hover {
+.plant-card:hover {
     transform: translateY(-4px);
     border-color: var(--accent-green);
 }
 
-.card-alert {
-    border-color: rgba(239, 68, 68, 0.4);
-}
-
-.chamber-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
-}
-
-.chamber-img-box, .img-wrapper {
+.img-wrapper {
     position: relative;
     width: 100%;
     height: 200px;
@@ -536,26 +480,10 @@ nav {
     margin-bottom: 1rem;
 }
 
-.chamber-img-box img, .plant-img {
+.plant-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-.ai-overlay {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-}
-
-.ai-tag {
-    font-size: 0.65rem;
-    background: rgba(0, 229, 255, 0.15);
-    color: var(--accent-cyan);
-    border: 1px solid var(--accent-cyan);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-family: var(--font-heading);
 }
 
 .metrics-grid {
@@ -582,17 +510,72 @@ nav {
     font-weight: 600;
 }
 
-.telemetry-row {
+/* Modal Overlay */
+#modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(8, 12, 20, 0.85);
+    backdrop-filter: blur(12px);
     display: flex;
-    justify-content: space-between;
-    background: rgba(0, 0, 0, 0.3);
-    padding: 0.5rem 0.75rem;
-    border-radius: 6px;
-    font-size: 0.85rem;
-    margin-bottom: 0.5rem;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
 }
 
-/* Team Section */
+#modal-overlay.modal-hidden {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+.modal-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 2.25rem 2rem 2rem;
+    width: 90%;
+    max-width: 480px;
+    position: relative;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), 0 0 25px var(--accent-green-glow);
+    transform: translateY(0);
+    transition: transform 0.3s ease;
+}
+
+#modal-overlay.modal-hidden .modal-card {
+    transform: translateY(-15px);
+}
+
+#modal-close {
+    position: absolute;
+    top: 16px; right: 20px;
+    background: none; border: none;
+    color: var(--text-muted);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+#modal-close:hover { color: var(--accent-danger); }
+
+#modal-title {
+    color: var(--accent-green);
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+
+#modal-desc {
+    color: var(--text-muted);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-top: 0.75rem;
+}
+
+/* Team Section & GitHub Link */
 .team-section {
     padding: 4rem 0 6rem;
     display: grid;
@@ -618,8 +601,17 @@ nav {
     margin-bottom: 1rem;
 }
 
-.email-sub {
-    font-size: 0.85rem;
+.email-sub { font-size: 0.85rem; }
+
+.github-link {
+    color: var(--accent-green);
+    text-decoration: underline;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.github-link:hover {
+    color: var(--accent-cyan);
 }
 
 /* Footer */
@@ -645,42 +637,42 @@ footer {
     text-align: center;
 }
 
-.qr-container {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-.qr-text {
-    text-align: right;
-}
-
-.qr-title {
-    color: var(--text-main);
-    font-weight: 600;
-}
-
-.qr-sub {
-    font-size: 0.8rem;
-}
-
-.qr-placeholder {
-    width: 90px;
-    height: 90px;
-    background: #fff;
-    padding: 5px;
-    border-radius: 8px;
-}
-
 /* Responsive Layout */
-@media (max-width: 900px) {
+@media (max-width: 850px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        right: -100%;
+        width: 100%;
+        max-width: 280px;
+        height: calc(100vh - 70px);
+        background: rgba(8, 12, 20, 0.95);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 2.5rem 2rem;
+        gap: 1.5rem;
+        border-left: 1px solid var(--card-border);
+        transition: right 0.3s ease;
+    }
+
+    .nav-links.active {
+        right: 0;
+    }
+
     .hero, .overview-section, .capabilities-grid, .team-section {
         grid-template-columns: 1fr;
     }
+
     .hero-title {
         font-size: 2.5rem;
     }
-    .chamber-card, .plant-card {
+
+    .plant-card {
         flex: 0 0 85%;
     }
 }
