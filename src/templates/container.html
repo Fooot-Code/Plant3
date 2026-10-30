@@ -1,3 +1,5 @@
+{% extends "home.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +16,7 @@
     <header class="navbar">
         <div class="nav-brand">
             <a href="home.html">
-                <img class="nav-logo" src="images/sidewaysLogo.png" alt="Plant³ Logo" >
+                <img class="nav-logo" src="{{ url_for('static', path='images/sidewaysLogo.png') }}" alt="Plant³ Logo" >
             </a>
         </div>
         <nav>

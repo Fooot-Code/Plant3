@@ -1,12 +1,16 @@
+{% extends "home.html" %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant³ | AI Analysis & Telemetry</title>
-    <link rel="stylesheet" href="style.css">
+    <!-- Fixed stylesheet path -->
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <script src="script.js" defer></script>
+    <!-- Updated JavaScript asset -->
+    <script src="{{ url_for('static', path='/script.js') }}" defer></script>
 </head>
 <body>
     <canvas id="bg-animation"></canvas>
@@ -14,7 +18,8 @@
     <header class="navbar">
         <div class="nav-brand">
             <a href="home.html">
-                <img class="nav-logo" src="images/sidewaysLogo.png" alt="Plant³ Logo" >
+                <!-- Updated brand logo image -->
+                <img class="nav-logo" src="{{ url_for('static', path='/images/sidewaysLogo.png') }}" alt="Plant³ Logo" >
             </a>
         </div>
         <nav>
@@ -43,7 +48,8 @@
                         <span class="status-badge healthy">NOMINAL</span>
                     </div>
                     <div class="img-wrapper">
-                        <img class="plant-img" src="images/tomato.jpg" alt="Chamber 1 Specimen">
+                        <!-- Updated Chamber 1 specimen image -->
+                        <img class="plant-img" src="{{ url_for('static', path='/images/tomato.jpg') }}" alt="Chamber 1 Specimen">
                     </div>
                     <div class="metrics-grid">
                         <div class="metric"><span class="m-label">Water Status</span><span class="m-val text-green">Good</span></div>
@@ -58,7 +64,8 @@
                         <span class="status-badge alert">WATER LOW</span>
                     </div>
                     <div class="img-wrapper">
-                        <img class="plant-img" src="images/lettuce.jpg" alt="Chamber 2 Specimen">
+                        <!-- Updated Chamber 2 specimen image -->
+                        <img class="plant-img" src="{{ url_for('static', path='/images/lettuce.jpg') }}" alt="Chamber 2 Specimen">
                     </div>
                     <div class="metrics-grid">
                         <div class="metric"><span class="m-label">Water Status</span><span class="m-val text-alert">32% (Refill)</span></div>
@@ -73,7 +80,8 @@
                         <span class="status-badge healthy">NOMINAL</span>
                     </div>
                     <div class="img-wrapper">
-                        <img class="plant-img" src="images/tomato.jpg" alt="Chamber 3 Specimen">
+                        <!-- Updated Chamber 3 specimen image -->
+                        <img class="plant-img" src="{{ url_for('static', path='/images/tomato.jpg') }}" alt="Chamber 3 Specimen">
                     </div>
                     <div class="metrics-grid">
                         <div class="metric"><span class="m-label">Water Status</span><span class="m-val text-green">Good</span></div>

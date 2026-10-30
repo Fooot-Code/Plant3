@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant³ | NASA HUNCH Login</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body class="center-body">
     <canvas id="bg-animation"></canvas>
     <main class="login-card">
         <div class="logo-container">
-            <img class="logo" src="images/introLogo.png" alt="Plant Cubed Logo">
+            <img class="logo" src="{{ url_for('static', path='/images/introLogo.png') }}" alt="Plant Cubed Logo">
             <h2>NASA HUNCH AI PLANT LAB</h2>
         </div>
 
@@ -30,6 +30,6 @@
         </form>
     </main>
 
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', path='/script.js') }}"></script>
 </body>
 </html>
