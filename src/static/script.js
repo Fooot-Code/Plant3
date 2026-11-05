@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (loginForm) {
         loginForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            window.location.href = "home.html";
+            window.location.href = "/hello";
         });
     }
 

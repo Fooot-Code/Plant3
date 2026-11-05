@@ -1,4 +1,4 @@
-{% extends "home.html" %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,11 +6,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant³ | AI Analysis & Telemetry</title>
-    <!-- Fixed stylesheet path -->
     <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <!-- Updated JavaScript asset -->
-    <script src="{{ url_for('static', path='/script.js') }}" defer></script>
+
+    
 </head>
 <body>
     <canvas id="bg-animation"></canvas>
@@ -101,5 +100,7 @@
             <p id="modal-desc" style="margin-top: 10px; font-size: 0.85rem;">Neural vision scan reveals no active fungal pathogens or nitrogen deficiencies.</p>
         </div>
     </div>
+
+    <script src="{{ url_for('static', path='/script.js') }}" defer></script>
 </body>
 </html>

@@ -33,10 +33,19 @@ else
     echo "fastAPI already installed"
 fi
 
-if [ pip show uvicorn -ne 0 ]; then
+pip show uvicorn
+if [ $? -ne 0 ]; then
     pip install "uvicorn[standard]" 
 else
     echo "uvicorn already installed"
+fi
+
+pip show pyserial
+
+if [ $? -ne 0 ]; then
+    pip install "pyserial[standard]" 
+else
+    echo "pyserial already installed"
 fi
 
 cd ./src

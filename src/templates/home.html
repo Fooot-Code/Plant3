@@ -1,4 +1,4 @@
-{% extends "static/login.html" %}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Plant³ | Dashboard Overview</title>
-    <link rel="stylesheet" href="{{ url_for('static', path='/static/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -21,10 +21,10 @@
 
         </div>
         <nav>
-            <a href="home.html" class="active">Overview</a>
-            <a href="plantAnalysis.html">AI Telemetry</a>
-            <a href="container.html">Container Info</a>
-            <a href="login.html" class="logout-btn">Logout</a>
+            <a href="{{ url_for('home') }}" class="active">Overview</a>
+            <a href="{{ url_for('analysis') }}">AI Telemetry</a>
+            <a href="{{ url_for('container') }}">Container Info</a>
+            <a href="{{ url_for('login') }}" class="logout-btn">Logout</a>
         </nav>
     </header>
 
@@ -55,6 +55,6 @@
 
     </main>
 
-    <script src="script.js"></script>
+    <script src="{{ url_for('static', path='/script.js') }}"></script>
 </body>
 </html>
