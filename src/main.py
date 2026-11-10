@@ -32,8 +32,16 @@ def container(request: Request):
         request=request, name="container.html"
     )
 
+@app.get("/edit.html", response_class=HTMLResponse)
+def edit(request: Request):
+    return templates.TemplateResponse(
+        request=request, name="edit.html"
+    )
+
+
+
 @app.get("/login.html", response_class=HTMLResponse)
-def container(request: Request):
+def login(request: Request):
     return templates.TemplateResponse(
         request=request, name="login.html"
     )

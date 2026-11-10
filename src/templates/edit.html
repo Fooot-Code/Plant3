@@ -1,0 +1,43 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plant³ | Container Information</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <canvas id="bg-animation"></canvas>
+
+    <header class="navbar">
+        <div class="nav-brand">
+            <a href="home.html">
+                <img class="nav-logo" src="{{ url_for('static', path='images/sidewaysLogo.png') }}" alt="Plant³ Logo" >
+            </a>
+        </div>
+        <nav>
+            <a href="{{ url_for('home') }}" class="active">Overview</a>
+            <a href="{{ url_for('analysis') }}">AI Telemetry</a>
+            <a href="{{ url_for('container') }}">Container Info</a>
+            <a href="{{ url_for('edit') }}">Edit Plants</a>
+            <a href="{{ url_for('login') }}" class="logout-btn">Logout</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div class="header-section">
+            <div>
+                <h2>Edit Plants</h2>
+                <p style="color: var(--text-muted);">24" x 24" x 25" Enclosed Microgravity Plant Habitat Diagnostics</p>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

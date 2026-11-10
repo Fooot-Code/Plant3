@@ -17,15 +17,15 @@
     <header class="navbar">
         <div class="nav-brand">
             <a href="home.html">
-                <!-- Updated brand logo image -->
                 <img class="nav-logo" src="{{ url_for('static', path='/images/sidewaysLogo.png') }}" alt="Plant³ Logo" >
             </a>
         </div>
         <nav>
-            <a href="home.html">Overview</a>
-            <a href="plantAnalysis.html" class="active">AI Telemetry</a>
-            <a href="container.html">Container Info</a>
-            <a href="login.html" class="logout-btn">Logout</a>
+            <a href="{{ url_for('home') }}" class="active">Overview</a>
+            <a href="{{ url_for('analysis') }}">AI Telemetry</a>
+            <a href="{{ url_for('container') }}">Container Info</a>
+            <a href="{{ url_for('edit') }}">Edit Plants</a>
+            <a href="{{ url_for('login') }}" class="logout-btn">Logout</a>
         </nav>
     </header>
 
