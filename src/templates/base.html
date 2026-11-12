@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plant³ | Dashboard Overview</title>
+    <title>Plant³ | {% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', path='/style.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 </head>
@@ -21,38 +21,25 @@
 
         </div>
         <nav>
-            <a href="{{ url_for('home') }}" class="active">Overview</a>
-            <a href="{{ url_for('analysis') }}">AI Telemetry</a>
-            <a href="{{ url_for('container') }}">Container Info</a>
-            <a href="{{ url_for('edit') }}">Edit Plants</a>
-            <a href="{{ url_for('login') }}" class="logout-btn">Logout</a>
+
+            {% for item in nav_items %}
+            
+                <a href="{{ url_for(item.route) }}" 
+                class="nav-link {{ 'active' if request.url.path == item.path }} {{ 'logout-btn' if item.label == 'Logout' }}">
+                {{ item.label }}
+                </a>
+
+            {% endfor %}
+
+
         </nav>
     </header>
 
     <main class="container">
-        <section class="hero-banner">
-            <div class="hero-text">
-                <span class="badge-tag">NASA HUNCH PROJECT</span>
-                <h1>AI Autonomous Microgravity Agriculture</h1>
-                <p>Real-time neural computer vision and sensor telemetry monitoring environmental stress and foliage vital signs.</p>
-                <br>
-                <a href="container.html" class="btn-primary">Inspect Container Status</a>
-            </div>
-            <div class="hero-stats">
-                <div class="stat-card">
-                    <span class="stat-value">23.5°C</span>
-                    <span class="stat-label">Container Temp</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-value">3 / 3</span>
-                    <span class="stat-label">Active Chambers</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-value">Nominal</span>
-                    <span class="stat-label">System Health</span>
-                </div>
-            </div>
-        </section>
+
+        {% block section %}
+        {% endblock %}
+
 
     </main>
 

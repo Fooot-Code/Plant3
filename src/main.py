@@ -8,6 +8,15 @@ app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 
+templates.env.globals["nav_items"] = [
+    {"route": "home", "path": "/home.html", "label": "Overview"},
+    {"route": "analysis", "path": "/plantAnalysis.html", "label": "AI Telemetry"},
+    {"route": "container", "path": "/container.html", "label": "Container Info"},
+    {"route": "edit", "path": "/edit.html", "label": "Edit Plants"},
+    {"route": "login", "path": "/login.html", "label": "Logout"},
+
+]
+
 @app.get("/", response_class=HTMLResponse)
 def login(request: Request):
     return templates.TemplateResponse(
