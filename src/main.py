@@ -2,11 +2,13 @@ from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from pathlib import Path
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+dashboard_dir = Path(__file__).resolve().parent / "dashboard"
+app.mount("/static", StaticFiles(directory=dashboard_dir / "static"), name="static")
+templates = Jinja2Templates(directory=dashboard_dir / "templates")
 
 templates.env.globals["nav_items"] = [
     {"route": "home", "path": "/home.html", "label": "Overview"},
