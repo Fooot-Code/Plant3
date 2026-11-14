@@ -1,4 +1,18 @@
-/.venv
-src/__pycache__/
+# --- PlatformIO & Embedded ---
+.pio/
+.pip/
+
+# --- Python & FastAPI ---
+__pycache__/
 *.py[cod]
 *$py.class
+.venv/
+venv/
+env/
+.pytest_cache/
+
+# --- IDE & OS Specific ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
