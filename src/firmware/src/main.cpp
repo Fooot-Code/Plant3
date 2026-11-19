@@ -5,8 +5,7 @@ const int pinNumber = 5;
 Pump pump{pinNumber};
 const byte numChars = 32;
 char receivedChars[numChars];
-
-void 
+bool newData = false;
 
 void setup() {
   Serial.begin(9600);
@@ -20,16 +19,30 @@ void loop() {
 
 
 void dataCheck() {
-  char serialInput;
+  char endMarker = '\n';
+  char currentChar;
+  static byte currentPos = 0;
 
   while (Serial.available() > 0) {
-    serialInput = Serial.read();
+    currentChar = Serial.read();
 
-    if (serialInput != endMarker) {
-      if (rc != '\r') {
+    if (currentChar != endMarker) {
+      if (currentChar != '\r') {
+        recievedChars[currentPos] = currentChar
+        currentPos++;
+
+        if (currentPos >= numChars) {
+          currentPos = numChars - 1;
+        }
 
       }
     } 
+    else {
+      receivedChars[currentPos] = '\0';
+      currentPos = 0;
+      newData = true;
+
+    }
   }
 }
 
