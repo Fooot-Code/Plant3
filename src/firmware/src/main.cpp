@@ -1,8 +1,14 @@
 #include <Arduino.h>
 #include <pump.h>
 
-const int pinNumber = 5;
-Pump pump{pinNumber};
+const int motorPin = 5;
+Pump pump{motorPin};
+
+const int moisturePin = A0;
+
+const int dryValue = 595;
+const int wetValue = 239; 
+
 const byte numChars = 32;
 char receivedChars[numChars];
 bool newData = false;
@@ -15,6 +21,7 @@ void setup() {
 
 void loop() {
   // TODO: Read from serial port on how long to pump, pump for that time, and then release pump. 
+
 }
 
 
@@ -28,7 +35,7 @@ void dataCheck() {
 
     if (currentChar != endMarker) {
       if (currentChar != '\r') {
-        recievedChars[currentPos] = currentChar
+        receivedChars[currentPos] = currentChar;
         currentPos++;
 
         if (currentPos >= numChars) {

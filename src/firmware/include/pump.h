@@ -3,10 +3,10 @@
 
 class Pump {
   private:
-    int _pin;
+    int pin;
 
   public:
-    Pump(int pin); // Constructor
+    Pump(int pin); 
     void begin();
     void on();
     void off();
